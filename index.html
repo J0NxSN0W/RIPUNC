@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>In Memory</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+<style>
+    /* Basic reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+
+    body {
+        font-family: 'Roboto', sans-serif;
+        background: linear-gradient(to bottom, #0d0d0d, #1a1a1a);
+        color: #f0f0f0;
+        overflow-x: hidden;
+    }
+
+    .container {
+        width: 90%;
+        max-width: 1200px;
+        margin: auto;
+        text-align: center;
+        padding: 50px 0;
+    }
+
+    .hero {
+        position: relative;
+        margin-bottom: 50px;
+    }
+
+    .hero img {
+        width: 300px;
+        height: 300px;
+        border-radius: 50%;
+        border: 5px solid #ff4c4c;
+        box-shadow: 0 0 50px rgba(255, 76, 76, 0.5);
+        animation: pulse 3s infinite;
+    }
+
+    @keyframes pulse {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+    }
+
+    h1 {
+        font-family: 'Playfair Display', serif;
+        font-size: 3rem;
+        margin-top: 20px;
+        color: #ff4c4c;
+        text-shadow: 2px 2px 10px rgba(255, 76, 76, 0.7);
+    }
+
+    p {
+        font-size: 1.3rem;
+        margin: 15px 0;
+        line-height: 1.8;
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+        opacity: 0;
+        animation: fadeIn 2s forwards;
+        animation-delay: 1s;
+    }
+
+    @keyframes fadeIn {
+        to { opacity: 1; }
+    }
+
+    .quotes {
+        margin-top: 40px;
+        font-style: italic;
+        font-size: 1.1rem;
+        color: #ccc;
+        animation: fadeIn 2s forwards;
+        animation-delay: 2s;
+    }
+
+    .quote {
+        margin: 20px 0;
+        position: relative;
+    }
+
+    .quote::before, .quote::after {
+        content: '"';
+        font-size: 2rem;
+        color: #ff4c4c;
+        vertical-align: top;
+    }
+
+    .footer {
+        margin-top: 80px;
+        font-size: 0.9rem;
+        color: #777;
+        opacity: 0.7;
+    }
+
+    /* Interactive effect */
+    body:hover {
+        background: linear-gradient(to bottom, #1a1a1a, #0d0d0d);
+        transition: 1.5s;
+    }
+
+</style>
+</head>
+<body>
+
+<div class="container">
+    <div class="hero">
+        <img src="functional.png" alt="In memory">
+    </div>
+    <h1>Remembering a Life</h1>
+    <p>He was a victim of the zilly, but his memory will be cherished forever. Not all understood him, but those who did, never forgot him.</p>
+
+    <div class="quotes">
+        <div class="quote">He didn’t like many, many didn’t like him.</div>
+        <div class="quote">Sometimes shadows leave the brightest mark.</div>
+        <div class="quote">In silence, we hear the loudest memories.</div>
+    </div>
+
+    <div class="footer">
+        <p>Created with love and reflection. May the memory linger like a pulse in the night.</p>
+    </div>
+</div>
+
+</body>
+</html>
