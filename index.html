@@ -3,166 +3,279 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>In Memory</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    <title>A Life Remembered: [Name Here]</title>
     <style>
-        /* CSS Variables for easy theme changes */
+        /* CSS for the entire page */
         :root {
-            --primary-color: #e74c3c;
-            --background-start: #0a0a0a;
-            --background-end: #121212;
-            --text-light: #f4f4f4;
-            --text-muted: #aaa;
-            --border-color: #2c2c2c;
-            --shadow-color: rgba(231, 76, 60, 0.4);
+            --primary-color: #6a0572; /* Dark purple */
+            --secondary-color: #a333c8; /* Lighter purple */
+            --text-color: #444; /* Dark grey */
+            --light-color: #fff; /* White */
+            --background-color: #f7f7f7; /* Light grey */
         }
 
-        /* Basic Reset */
-        *, *::before, *::after {
+        * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
         }
 
         body {
-            font-family: 'Roboto', sans-serif;
-            background: linear-gradient(to bottom, var(--background-start), var(--background-end));
-            color: var(--text-light);
+            font-family: 'Georgia', serif;
             line-height: 1.6;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow-x: hidden;
-            padding: 20px 0;
+            color: var(--text-color);
+            background-color: var(--background-color);
+            text-align: center;
         }
 
         .container {
-            width: 90%;
-            max-width: 800px;
+            max-width: 1100px;
             margin: auto;
-            text-align: center;
-            padding: 40px;
-            background: #1a1a1a;
-            border-radius: 15px;
-            border: 1px solid var(--border-color);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            animation: fadeIn 2s ease-in-out;
+            padding: 0 20px;
         }
 
-        .hero {
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--light-color);
+            padding: 40px 0;
             position: relative;
-            margin-bottom: 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
-        .hero img {
-            width: 250px;
-            height: 250px;
-            border-radius: 50%;
-            border: 4px solid var(--primary-color);
-            object-fit: cover;
-            filter: grayscale(80%) blur(1px);
-            box-shadow: 0 0 40px var(--shadow-color);
-            animation: pulse 4s infinite ease-in-out;
-            transition: filter 0.5s ease;
-        }
-
-        .hero img:hover {
-            filter: grayscale(0%) blur(0px);
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.03); box-shadow: 0 0 60px var(--shadow-color); }
-        }
-
-        h1 {
+        header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
             font-family: 'Playfair Display', serif;
-            font-size: clamp(2rem, 5vw, 3.5rem);
-            margin-top: 20px;
-            color: var(--primary-color);
-            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
         }
 
-        p {
-            font-size: clamp(1rem, 2.5vw, 1.2rem);
-            margin: 20px auto;
-            max-width: 600px;
-            color: var(--text-light);
-        }
-
-        .quotes {
-            margin-top: 50px;
+        header p {
+            font-size: 1.2em;
             font-style: italic;
-            color: var(--text-muted);
-            opacity: 0;
-            animation: fadeIn 2s forwards;
-            animation-delay: 1.5s;
         }
 
-        .quote {
-            margin: 20px auto;
-            font-size: clamp(0.9rem, 2vw, 1.1rem);
-            position: relative;
-            transition: transform 0.3s ease, color 0.3s ease;
-        }
-
-        .quote:hover {
-            transform: scale(1.05);
-            color: var(--primary-color);
-        }
-        
-        .quote::before, .quote::after {
-            content: '“';
-            font-size: 2rem;
-            color: var(--primary-color);
+        .profile-image-container {
             position: absolute;
-            opacity: 0.8;
+            bottom: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 5px solid var(--light-color);
+            border-radius: 50%;
+            overflow: hidden;
+            width: 150px;
+            height: 150px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
 
-        .quote::after {
-            content: '”';
-        }
-        
-        .quote:nth-child(1)::before { left: 0; top: -10px; }
-        .quote:nth-child(1)::after { right: 0; bottom: -10px; }
-        
-        .footer {
-            margin-top: 60px;
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            opacity: 0.8;
-            border-top: 1px dashed var(--border-color);
-            padding-top: 20px;
+        .profile-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        .main-content {
+            padding-top: 80px;
+        }
+
+        .section {
+            background: var(--light-color);
+            padding: 40px;
+            margin: 30px auto;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            text-align: left;
+        }
+
+        .section-title {
+            color: var(--primary-color);
+            font-size: 2.5em;
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        /* About Section */
+        #about p {
+            font-size: 1.1em;
+            text-indent: 2em;
+        }
+
+        /* Gallery Section */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            text-align: center;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .gallery-item img:hover {
+            transform: scale(1.05);
+        }
+
+        /* Memory Wall */
+        .memory-form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .memory-form input, .memory-form textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: inherit;
+        }
+
+        .memory-form button {
+            background-color: var(--primary-color);
+            color: var(--light-color);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s;
+        }
+
+        .memory-form button:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .memories-list {
+            margin-top: 20px;
+        }
+
+        .memory-post {
+            background: var(--background-color);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+            text-align: left;
+        }
+
+        .memory-post h4 {
+            color: var(--secondary-color);
+            margin-bottom: 5px;
+        }
+
+        .memory-post p {
+            margin-bottom: 0;
+            font-size: 0.9em;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary-color);
+            color: var(--light-color);
+            padding: 20px 0;
+            margin-top: 50px;
+            font-size: 0.9em;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
         }
 
     </style>
+    <script>
+        // JavaScript for interactivity
+        document.addEventListener('DOMContentLoaded', () => {
+            const memoryForm = document.getElementById('memory-form');
+            const memoriesList = document.getElementById('memories-list');
+
+            if (memoryForm) {
+                memoryForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+
+                    const name = document.getElementById('memory-name').value;
+                    const message = document.getElementById('memory-message').value;
+
+                    if (name && message) {
+                        const newMemory = document.createElement('div');
+                        newMemory.classList.add('memory-post');
+                        newMemory.innerHTML = `
+                            <h4>${name}</h4>
+                            <p>${message}</p>
+                        `;
+
+                        memoriesList.prepend(newMemory);
+
+                        // Clear the form
+                        memoryForm.reset();
+
+                        // Simple storage (for this example, it's temporary)
+                        // In a real application, you would save this to a database.
+                    }
+                });
+            }
+        });
+    </script>
 </head>
 <body>
 
-<main class="container">
-    <div class="hero">
-<img src="IMG_2915.jpeg" alt="In memory">
+    <header>
+        <div class="container">
+            <h1 id="person-name">Remembering a Beautiful Soul</h1>
+            <p id="person-dates">[Date of Birth] - [Date of Passing]</p>
+            <div class="profile-image-container">
+                <img id="profile-img" src="IMG_2915.jpeg" alt="[Their Name]'s Profile Image" class="profile-image">
+            </div>
+        </div>
+    </header>
 
-    </div>
-    <h1>Remembering a Life</h1>
-    <p>He was a victim of the zilly, but his memory will be cherished forever. Not all understood him, but those who did, never forgot him.</p>
+    <main class="main-content">
+        <div class="container">
+            <section id="about" class="section">
+                <h2 class="section-title">A Life Well Lived</h2>
+                <p>
+                    [Insert a heartfelt biography here. Tell their story—their passions, their accomplishments, and the joy they brought to others. This section should paint a vivid picture of who they were.]
+                </p>
+                <p>
+                    [You can add more paragraphs to expand on their life story, hobbies, and the impact they had on the world.]
+                </p>
+            </section>
 
-    <section class="quotes">
-        <div class="quote">He didn’t like many, many didn’t like him.</div>
-        <div class="quote">Sometimes shadows leave the brightest mark.</div>
-        <div class="quote">In silence, we hear the loudest memories.</div>
-    </section>
+            <section id="gallery" class="section">
+                <h2 class="section-title">Photo & Video Gallery</h2>
+                <div class="gallery">
+                    <div class="gallery-item"><img src="https://via.placeholder.com/300x200?text=Memory+1" alt="Memory 1"></div>
+                    <div class="gallery-item"><img src="https://via.placeholder.com/300x200?text=Memory+2" alt="Memory 2"></div>
+                    <div class="gallery-item"><img src="https://via.placeholder.com/300x200?text=Memory+3" alt="Memory 3"></div>
+                    <div class="gallery-item"><img src="https://via.placeholder.com/300x200?text=Memory+4" alt="Memory 4"></div>
+                </div>
+            </section>
 
-    <footer class="footer">
-        <p>Created with love and reflection. May the memory linger like a pulse in the night.</p>
+            <section id="memory-wall" class="section">
+                <h2 class="section-title">Share a Memory</h2>
+                <form id="memory-form" class="memory-form">
+                    <input type="text" id="memory-name" placeholder="Your Name" required>
+                    <textarea id="memory-message" rows="5" placeholder="Write your message or share a memory..." required></textarea>
+                    <button type="submit">Post Memory</button>
+                </form>
+
+                <div id="memories-list" class="memories-list">
+                    <div class="memory-post">
+                        <h4>Jane Doe</h4>
+                        <p>I will always cherish our time together. Their kindness and laughter brightened my life.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 A Life Remembered. All Rights Reserved.</p>
+        </div>
     </footer>
-</main>
 
 </body>
 </html>
