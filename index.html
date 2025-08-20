@@ -1,127 +1,167 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>In Memory</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
-<style>
-    /* Basic reset */
-    * { margin:0; padding:0; box-sizing:border-box; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>In Memory</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Variables for easy theme changes */
+        :root {
+            --primary-color: #e74c3c;
+            --background-start: #0a0a0a;
+            --background-end: #121212;
+            --text-light: #f4f4f4;
+            --text-muted: #aaa;
+            --border-color: #2c2c2c;
+            --shadow-color: rgba(231, 76, 60, 0.4);
+        }
 
-    body {
-        font-family: 'Roboto', sans-serif;
-        background: linear-gradient(to bottom, #0d0d0d, #1a1a1a);
-        color: #f0f0f0;
-        overflow-x: hidden;
-    }
+        /* Basic Reset */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    .container {
-        width: 90%;
-        max-width: 1200px;
-        margin: auto;
-        text-align: center;
-        padding: 50px 0;
-    }
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(to bottom, var(--background-start), var(--background-end));
+            color: var(--text-light);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow-x: hidden;
+            padding: 20px 0;
+        }
 
-    .hero {
-        position: relative;
-        margin-bottom: 50px;
-    }
+        .container {
+            width: 90%;
+            max-width: 800px;
+            margin: auto;
+            text-align: center;
+            padding: 40px;
+            background: #1a1a1a;
+            border-radius: 15px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            animation: fadeIn 2s ease-in-out;
+        }
 
-    .hero img {
-        width: 300px;
-        height: 300px;
-        border-radius: 50%;
-        border: 5px solid #ff4c4c;
-        box-shadow: 0 0 50px rgba(255, 76, 76, 0.5);
-        animation: pulse 3s infinite;
-    }
+        .hero {
+            position: relative;
+            margin-bottom: 30px;
+        }
 
-    @keyframes pulse {
-        0%, 100% { transform: scale(1); }
-        50% { transform: scale(1.05); }
-    }
+        .hero img {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            border: 4px solid var(--primary-color);
+            object-fit: cover;
+            filter: grayscale(80%) blur(1px);
+            box-shadow: 0 0 40px var(--shadow-color);
+            animation: pulse 4s infinite ease-in-out;
+            transition: filter 0.5s ease;
+        }
 
-    h1 {
-        font-family: 'Playfair Display', serif;
-        font-size: 3rem;
-        margin-top: 20px;
-        color: #ff4c4c;
-        text-shadow: 2px 2px 10px rgba(255, 76, 76, 0.7);
-    }
+        .hero img:hover {
+            filter: grayscale(0%) blur(0px);
+        }
 
-    p {
-        font-size: 1.3rem;
-        margin: 15px 0;
-        line-height: 1.8;
-        max-width: 700px;
-        margin-left: auto;
-        margin-right: auto;
-        opacity: 0;
-        animation: fadeIn 2s forwards;
-        animation-delay: 1s;
-    }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.03); box-shadow: 0 0 60px var(--shadow-color); }
+        }
 
-    @keyframes fadeIn {
-        to { opacity: 1; }
-    }
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            margin-top: 20px;
+            color: var(--primary-color);
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+        }
 
-    .quotes {
-        margin-top: 40px;
-        font-style: italic;
-        font-size: 1.1rem;
-        color: #ccc;
-        animation: fadeIn 2s forwards;
-        animation-delay: 2s;
-    }
+        p {
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
+            margin: 20px auto;
+            max-width: 600px;
+            color: var(--text-light);
+        }
 
-    .quote {
-        margin: 20px 0;
-        position: relative;
-    }
+        .quotes {
+            margin-top: 50px;
+            font-style: italic;
+            color: var(--text-muted);
+            opacity: 0;
+            animation: fadeIn 2s forwards;
+            animation-delay: 1.5s;
+        }
 
-    .quote::before, .quote::after {
-        content: '"';
-        font-size: 2rem;
-        color: #ff4c4c;
-        vertical-align: top;
-    }
+        .quote {
+            margin: 20px auto;
+            font-size: clamp(0.9rem, 2vw, 1.1rem);
+            position: relative;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
 
-    .footer {
-        margin-top: 80px;
-        font-size: 0.9rem;
-        color: #777;
-        opacity: 0.7;
-    }
+        .quote:hover {
+            transform: scale(1.05);
+            color: var(--primary-color);
+        }
+        
+        .quote::before, .quote::after {
+            content: '“';
+            font-size: 2rem;
+            color: var(--primary-color);
+            position: absolute;
+            opacity: 0.8;
+        }
 
-    /* Interactive effect */
-    body:hover {
-        background: linear-gradient(to bottom, #1a1a1a, #0d0d0d);
-        transition: 1.5s;
-    }
+        .quote::after {
+            content: '”';
+        }
+        
+        .quote:nth-child(1)::before { left: 0; top: -10px; }
+        .quote:nth-child(1)::after { right: 0; bottom: -10px; }
+        
+        .footer {
+            margin-top: 60px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            opacity: 0.8;
+            border-top: 1px dashed var(--border-color);
+            padding-top: 20px;
+        }
 
-</style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+    </style>
 </head>
 <body>
 
-<div class="container">
+<main class="container">
     <div class="hero">
         <img src="functional.png" alt="In memory">
     </div>
     <h1>Remembering a Life</h1>
     <p>He was a victim of the zilly, but his memory will be cherished forever. Not all understood him, but those who did, never forgot him.</p>
 
-    <div class="quotes">
+    <section class="quotes">
         <div class="quote">He didn’t like many, many didn’t like him.</div>
         <div class="quote">Sometimes shadows leave the brightest mark.</div>
         <div class="quote">In silence, we hear the loudest memories.</div>
-    </div>
+    </section>
 
-    <div class="footer">
+    <footer class="footer">
         <p>Created with love and reflection. May the memory linger like a pulse in the night.</p>
-    </div>
-</div>
+    </footer>
+</main>
 
 </body>
 </html>
